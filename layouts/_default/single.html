@@ -7,8 +7,12 @@
       <h1 class="article-title">{{ .Title }}</h1>
       {{ with .Params.subtitle }}<h2 class="article-subtitle">{{ . }}</h2>{{ end }}
       <hr class="article-title-bottom">
-      <ul class="article-meta">
-        <li class="article-meta-date"><time>{{ .Date.Format (default "January 2, 2006" $.Site.Params.dateFormat) }}</time></li>
+      <ul class="article-meta">        
+        <li class="article-meta-date">
+          {{- if .Date }}
+          <time>{{ .Date.Format (default "January 1, 2006" $.Site.Params.dateFormat) }}</time>
+          {{- end }}
+        </li>
         {{- if .Params.categories }}
         {{- range .Params.categories }}
         <li class="article-meta-categories">
@@ -61,6 +65,7 @@
     </div>
     {{- end }}
 
+    {{- if eq .Type "posts"  }}
     <ul class="pager article-pager">
       {{- if .NextInSection }}
       <li class="pager-newer">
@@ -77,5 +82,6 @@
       <li class="pager-older pager-noitem">Older &gt;</li>
       {{- end }}
     </ul>
+    {{- end }}
   </div>
 {{ end }}

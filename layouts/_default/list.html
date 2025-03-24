@@ -11,8 +11,8 @@
   {{- end }}
   <div class="main" role="main">
     <section class="list {{ .Kind }}-list">
-      {{- $paginator := .Paginator }}
-      {{- range $paginator.Pages }}
+      {{ $paginator := .Paginate .Site.RegularPages -}}
+      {{- range $paginator.Pages  }}
       <article class="article">
         <a href="{{ .Permalink | relURL }}" class="article-titles">
           <h2 class="article-title">{{ .Title }}</h2>
